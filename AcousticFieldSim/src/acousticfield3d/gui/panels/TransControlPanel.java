@@ -11,6 +11,7 @@ import acousticfield3d.protocols.ChainedFPGA;
 import acousticfield3d.protocols.DeviceConnection;
 import acousticfield3d.protocols.SimpleFPGA;
 import acousticfield3d.protocols.SimpleFPGA_128;
+import acousticfield3d.protocols.PicoDriver;
 import acousticfield3d.scene.Entity;
 import acousticfield3d.simulation.AnimKeyFrame;
 import acousticfield3d.simulation.Simulation;
@@ -101,12 +102,17 @@ public class TransControlPanel extends javax.swing.JPanel {
             }
         });
 
-        deviceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MEGA", "SimpleFPGA", "Nano8", "MEGA_Anim", "Nano16", "SimpleFPGA 128", "Chained FPGA" }));
+        deviceCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MEGA", "SimpleFPGA", "Nano8", "MEGA_Anim", "Nano16", "SimpleFPGA 128", "Chained FPGA", "PicoDriver" }));
         deviceCombo.setToolTipText("select the protocol");
+        deviceCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deviceComboActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Phase");
 
-        phaseSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        phaseSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         phaseSpinner.setToolTipText("current phase - in divisions");
         phaseSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -277,6 +283,10 @@ public class TransControlPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_multiplexButtonActionPerformed
 
+    private void deviceComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deviceComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deviceComboActionPerformed
+
 
     private DeviceConnection getDeviceConnection(int port){
         final int index = deviceCombo.getSelectedIndex();
@@ -296,6 +306,8 @@ public class TransControlPanel extends javax.swing.JPanel {
             dc = new SimpleFPGA_128();
         }else if (index == 6){ //chained FPGA
             dc = new ChainedFPGA();
+        }else if (index == 7){ //chained FPGA
+            dc = new PicoDriver();
         }else{
             dc = new DeviceConnection();
         }

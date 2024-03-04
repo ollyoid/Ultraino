@@ -19,6 +19,7 @@ public class DeviceConnection implements SerialComms.Listener{
     
     public void connect(int port){
         serial = new SerialComms(port, getSpeed(), this);
+        System.out.println(serial.toString());
     }
     
     public int getSpeed(){
