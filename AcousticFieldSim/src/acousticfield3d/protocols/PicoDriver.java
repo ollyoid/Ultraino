@@ -86,7 +86,7 @@ public class PicoDriver extends DeviceConnection{
             //final int n = t.getDriverPinNumber();
             if (n >= 0 && n < nTrans) { //is it within range
                 int phase = t.getDiscPhase(divs);
-                int amplitude = t.getDiscAmplitude(divs); 
+                int amplitude = t.getDiscAmplitude(30); // Bit of a hack... to get 0-15 range
                 
                 if (t.getpAmplitude() == 0){
                     phase = PHASE_OFF;
